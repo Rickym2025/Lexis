@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9M2LVJE5Z5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9M2LVJE5Z5');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexis AI | La Receptionist Telefonica H24 per il tuo Studio Legale</title>
+    
+    <!-- Metadati SEO & Favicon -->
+    <meta name="description" content="Ogni cliente trova sempre risposta. Chiara gestisce le telefonate dello studio legale H24, fissa gli appuntamenti su Google Calendar e invia promemoria automatici via WhatsApp ed Email.">
+    <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#030305',
+                        brandBlue: '#3b82f6',
+                        royalBlue: '#2563eb',
+                        panelBg: 'rgba(12, 12, 14, 0.95)'
+                    },
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { background-color: #030305; color: #f1f5f9; font-size: 18px; line-height: 1.6; }
+        .glass-panel { backdrop-filter: blur(10px); background: rgba(12, 12, 14, 0.92); border: 1px solid rgba(255, 255, 255, 0.08); }
+        video { transform: translate3d(0,0,0); backface-visibility: hidden; will-change: transform; perspective: 1000; }
+        .glow-text { text-shadow: 0 0 25px rgba(59, 130, 246, 0.55), 0 0 5px rgba(59, 130, 246, 0.3); }
+        .btn-pulse-glow { animation: pulse-glow-blue 2.5s infinite ease-in-out; }
+        @keyframes pulse-glow-blue {
+            0%, 100% { box-shadow: 0 0 15px rgba(37, 99, 235, 0.3); }
+            50%      { box-shadow: 0 0 35px rgba(37, 99, 235, 0.7); }
+        }
+        .card-glow { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .card-glow:hover {
+            box-shadow: 0 0 35px rgba(37, 99, 235, 0.22);
+            border-color: rgba(37, 99, 235, 0.45);
+            transform: translateY(-6px);
+        }
+        @keyframes decoy-glow {
+            0%, 100% { border-color: rgba(37, 99, 235, 0.3); box-shadow: 0 0 15px rgba(37, 99, 235, 0.15); }
+            50%      { border-color: rgba(37, 99, 235, 0.85); box-shadow: 0 0 35px rgba(37, 99, 235, 0.45); }
+        }
+        .decoy-highlight-card { animation: decoy-glow 3.5s infinite ease-in-out; border-width: 2px; }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- LAYER BACKGROUND VIDEO FLUIDO -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <video autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-15">
+            <source src="/background.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-darkBg/95 via-darkBg/60 to-darkBg"></div>
+    </div>
+
+    <!-- HEADER & NAVBAR -->
+    <header class="fixed top-0 left-0 w-full p-4 md:p-6 z-50 backdrop-blur-md bg-black/25 border-b border-white/5">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#" class="logo flex items-center gap-3 text-2xl font-bold tracking-wide text-white">
+                <span class="text-brandBlue font-black text-3xl">L<span class="text-white font-light">EXIS</span></span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-zinc-400">
+                <a href="#proposta" class="hover:text-white transition-colors">Vantaggi</a>
+                <a href="#funzionamento" class="hover:text-white transition-colors">Come funziona</a>
+                <a href="#prezzi" class="hover:text-white transition-colors">Piani</a>
+            </nav>
+            <a href="#registrazione-sezione" class="text-[10px] font-black uppercase tracking-widest text-brandBlue hover:text-blue-300 transition-colors border border-brandBlue/30 px-5 py-2.5 rounded-full bg-brandBlue/5 hover:bg-brandBlue/10">
+                Attiva Prova Gratis
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTENT LAYER -->
+    <main class="relative z-10 flex flex-col w-full">
+
+        <!-- HERO SECTION -->
+        <section class="min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
+                    Onboarding Immediato in 10 Minuti
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-[1.05] mb-8 text-white">
+                    Ogni chiamata è una causa salvata.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlue via-blue-400 to-blue-600 glow-text">
+                        Ci pensa Chiara.
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                    Chiara è la receptionist telefonica intelligente progettata per gli studi legali. Gestisce il flusso delle telefonate H24, accoglie i clienti con estrema formalità, fissa le consulenze ed evita le perdite di tempo in segreteria.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-4 max-w-md mx-auto">
+                    <a href="#registrazione-sezione" class="btn-pulse-glow bg-brandBlue hover:bg-blue-500 text-white font-black text-lg px-10 py-5 rounded-xl transition-all transform hover:scale-[1.02]">
+                        Provala Gratis per 7 Giorni 🎁
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALUE PROPOSITIONS -->
+        <section id="proposta" class="py-24 px-6 border-t border-white/5 bg-zinc-950/20">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <p class="font-mono text-xs text-brandBlue uppercase tracking-[5px] mb-4">Vantaggi per lo Studio</p>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Concentrati sulle cause, all&apos;accoglienza ci pensa Chiara</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card-glow glass-panel p-8 rounded-3xl border border-white/5 group">
+                        <div class="w-12 h-12 bg-brandBlue/10 rounded-2xl flex items-center justify-center text-brandBlue text-2xl border border-brandBlue/20 mb-6">🏛️</div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Presidio in Udienza</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed">Mentre sei in tribunale o in riunione con i clienti, Chiara risponde ad ogni chiamata per conto dello studio, spiegando le tue aree di specializzazione e raccogliendo i dati del cliente.</p>
+                    </div>
+                    <div class="card-glow glass-panel p-8 rounded-3xl border border-white/5 group">
+                        <div class="w-12 h-12 bg-brandBlue/10 rounded-2xl flex items-center justify-center text-brandBlue text-2xl border border-brandBlue/20 mb-6">📅</div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Consulenze in Agenda</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed">Interfacciata direttamente con Google Calendar. Chiara propone gli slot liberi dello studio, fissa la prima consulenza a pagamento in tempo reale e invia una notifica immediata.</p>
+                    </div>
+                    <div class="card-glow glass-panel p-8 rounded-3xl border border-white/5 group">
+                        <div class="w-12 h-12 bg-brandBlue/10 rounded-2xl flex items-center justify-center text-brandBlue text-2xl border border-brandBlue/20 mb-6">🔒</div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Riservatezza GDPR</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed">Tutte le conversazioni ed i dati dei clienti sono protetti e crittografati secondo i massimi standard di sicurezza europei, a tutela del segreto professionale medico e legale.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REGISTRAZIONE -->
+        <section id="registrazione-sezione" class="py-24 px-6 border-t border-white/5 relative">
+            <div class="max-w-3xl mx-auto glass-panel p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden card-glow">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brandBlue/10 blur-3xl rounded-full pointer-events-none"></div>
+                <h2 class="text-3xl font-bold mb-2 text-center tracking-tight">Attiva 7 Giorni di Prova Gratis</h2>
+                <p class="text-zinc-400 mb-8 text-center text-sm leading-relaxed max-w-xl mx-auto">
+                    <b>Come funziona la prova gratuita?</b><br>
+                    Crea l&apos;account istantaneamente senza inserire la carta. Riceverai subito un&apos;email con il tuo ID Studio e il nostro <b>Numero di Test Nazionale (+39 02 8295 9999)</b>.<br>
+                    Chiamalo dal tuo cellulare registrato per parlare subito con Chiara personalizzata per il tuo studio.
+                </p>
+                
+                <form id="form-registrazione" class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2 uppercase tracking-widest font-bold text-xs">Nome Studio Legale *</label>
+                        <input type="text" id="reg-nome" required class="w-full bg-black/50 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-brandBlue transition-colors text-sm" placeholder="es. Studio Legale Rossi">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2 uppercase tracking-widest font-bold text-xs">La tua Email *</label>
+                        <input type="email" id="reg-email" required class="w-full bg-black/50 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-brandBlue transition-colors text-sm" placeholder="es. avv.rossi@studio.it">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2 uppercase tracking-widest font-bold text-xs">Telefono dello Studio</label>
+                        <input type="tel" id="reg-tel" class="w-full bg-black/50 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-brandBlue transition-colors text-sm" placeholder="es. +39 02 8295 9999">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2 uppercase tracking-widest font-bold text-xs">Piano desiderato dopo la prova *</label>
+                        <select id="reg-piano" required class="w-full bg-black/50 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-brandBlue transition-colors appearance-none text-sm">
+                            <option value="Prova">Trial Gratuito (7 Giorni)</option>
+                            <option value="Base">Chiara Starter (Fuori Orario - 79€/mese)</option>
+                            <option value="Pro">Chiara PRO (H24 + WhatsApp Reminders - 149€/mese)</option>
+                            <option value="Max">Studio Elite (Multi-sede + Supporto - 299€/mese)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="md:col-span-2 mt-2">
+                        <button type="submit" id="btn-registrati" class="w-full bg-brandBlue text-white font-black py-4 rounded-xl hover:bg-blue-500 transition-transform active:scale-95 text-lg uppercase tracking-wider">Inizia Trial Gratuito</button>
+                    </div>
+                    <div id="reg-msg" class="md:col-span-2 text-center text-sm font-bold hidden"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- NEUROMARKETING PRICING -->
+        <section id="prezzi" class="py-24 px-6 border-t border-white/5 bg-zinc-950/30">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-20">
+                    <p class="font-mono text-xs text-brandBlue uppercase tracking-[5px] mb-4">Investimento</p>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight uppercase">Una sola consulenza recuperata ripaga l&apos;anno</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-stretch max-w-6xl mx-auto">
+                    
+                    <!-- TRIAL -->
+                    <div class="card-glow glass-panel p-6 rounded-3xl flex flex-col justify-between border border-white/5 group">
+                        <div>
+                            <span class="text-zinc-500 font-bold uppercase tracking-widest text-[10px] block mb-2">Prova Senza Impegno</span>
+                            <h3 class="text-lg font-bold text-white mb-1">7 Giorni Gratis</h3>
+                            <div class="mb-7 flex items-end gap-1 mt-6">
+                                <span class="text-4xl font-black text-white">Gratis</span>
+                            </div>
+                            <ul class="text-xs text-zinc-300 space-y-3 mb-8">
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> 7 Giorni di prova completi</li>
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Configurazione personalizzata</li>
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Integrazione Google Calendar</li>
+                            </ul>
+                        </div>
+                        <a href="#registrazione-sezione" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest">Inizia Gratis</a>
+                    </div>
+
+                    <!-- STARTER -->
+                    <div class="card-glow glass-panel p-6 rounded-3xl flex flex-col justify-between border border-white/5 group">
+                        <div>
+                            <span class="text-zinc-500 font-bold uppercase tracking-widest text-[10px] block mb-2">Fuori Orario</span>
+                            <h3 class="text-lg font-bold text-white mb-1">Chiara Starter</h3>
+                            <div class="mb-7 flex items-end gap-1 mt-6">
+                                <span class="text-4xl font-black text-white">€ 79</span>
+                                <span class="text-zinc-500 text-xs pb-1">/ mese</span>
+                            </div>
+                            <ul class="text-xs text-zinc-300 space-y-3 mb-8">
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Risposta attiva fuori orario (notti e weekend)</li>
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Notifica appuntamenti presi via Email</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest">Attiva Starter</a>
+                    </div>
+
+                    <!-- PRO -->
+                    <div class="decoy-highlight-card glass-panel p-6 rounded-3xl flex flex-col justify-between relative transform md:-translate-y-4 bg-gradient-to-b from-blue-950/20 to-black z-10 scale-105">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brandBlue text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg text-center w-[90%]">CONSIGLIATO PER GLI STUDI</div>
+                        <div>
+                            <span class="text-brandBlue font-bold uppercase tracking-widest text-[10px] block mb-2 mt-2">La Scelta d&apos;Oro</span>
+                            <h3 class="text-lg font-bold text-white mb-1">Chiara PRO</h3>
+                            <div class="mb-7 flex items-end gap-1 mt-6">
+                                <span class="text-4xl font-black text-white">€ 149</span>
+                                <span class="text-zinc-500 text-xs pb-1">/ mese</span>
+                            </div>
+                            <ul class="text-xs text-zinc-200 space-y-3 mb-8">
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Risposta H24 (anche su occupato)</li>
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Sincronizzazione automatica Google Calendar</li>
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Promemoria automatici via WhatsApp</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="block text-center w-full bg-brandBlue text-white font-black py-4 rounded-xl text-xs uppercase tracking-widest hover:bg-blue-700 transition-all">SBLOCCA CHIARA PRO 🔥</a>
+                    </div>
+
+                    <!-- ELITE -->
+                    <div class="card-glow glass-panel p-6 rounded-3xl flex flex-col justify-between border border-white/5 group">
+                        <div>
+                            <span class="text-zinc-500 font-bold uppercase tracking-widest text-[10px] block mb-2">Multi-medico</span>
+                            <h3 class="text-lg font-bold text-white mb-1">Studio Elite</h3>
+                            <div class="mb-7 flex items-end gap-1 mt-6">
+                                <span class="text-4xl font-black text-white">€ 299</span>
+                                <span class="text-zinc-500 text-xs pb-1">/ mese</span>
+                            </div>
+                            <ul class="text-xs text-zinc-300 space-y-3 mb-8">
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Gestione multi-sede e multi-calendario avvocati</li>
+                                <li class="flex items-center gap-2"><span class="text-brandBlue">✓</span> Supporto tecnico prioritario h24</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest">Richiedi Elite</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-black py-16 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-12">
+            <div>
+                <div class="flex items-center justify-center md:justify-start gap-3 text-white font-black text-2xl mb-4">
+                    <span class="text-brandBlue">L<span class="text-white font-light">EXIS</span></span>
+                </div>
+                <p class="text-zinc-500 text-sm leading-relaxed">© 2026 RM Studio. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- REGISTRAZIONE SCRIPT -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('form-registrazione');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('btn-registrati');
+                const msg = document.getElementById('reg-msg');
+                
+                btn.disabled = true;
+                btn.textContent = 'Creazione account... ⏳';
+                
+                const payload = {
+                    "Nome Agenzia": document.getElementById('reg-nome').value,
+                    "Email": document.getElementById('reg-email').value,
+                    "Telefono": document.getElementById('reg-tel').value,
+                    "Piano": document.getElementById('reg-piano').value,
+                    "Fonte": "Sito Web Lexis"
+                };
+
+                try {
+                    const response = await fetch('https://n8n.rmstudio.app/webhook/nuova-registrazione', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if(response.ok) {
+                        msg.textContent = 'Account creato! Controlla la tua email per ricevere le credenziali d\'accesso.';
+                        msg.className = 'md:col-span-2 text-center text-sm font-bold text-green-400 block mt-4';
+                        form.reset();
+                    } else {
+                        throw new Error('Errore server');
+                    }
+                } catch (error) {
+                    msg.textContent = 'Si è verificato un errore. Riprova più tardi.';
+                    msg.className = 'md:col-span-2 text-center text-sm font-bold text-red-400 block mt-4';
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Inizia Trial Gratuito';
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
