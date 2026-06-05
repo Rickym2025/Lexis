@@ -45,6 +45,38 @@
     </script>
 
     <style>
+        /* --- FIX DI SICUREZZA PER L'ORBITA (Incolla in cima al tag <style>) --- */
+        .orbit-tooltip {
+            position: absolute !important;
+            bottom: 80px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 200px !important;
+            background: #0a0a0c !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: #94a3b8 !important;
+            font-size: 13px !important;
+            border-radius: 8px !important;
+            padding: 12px !important;
+            opacity: 0 !important; /* Forza la sparizione di default */
+            pointer-events: none !important;
+            transition: opacity 0.2s ease-in-out !important;
+            text-align: center !important;
+            z-index: 50 !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+            line-height: 1.4 !important;
+        }
+        
+        .orbit-tooltip b {
+            color: white !important;
+            display: block !important;
+            margin-bottom: 4px !important;
+        }
+        
+        .orbit-item:hover .orbit-tooltip {
+            opacity: 1 !important; /* Forza la visualizzazione in hover */
+        }
+        
         *, *::before, *::after { box-sizing: border-box; }
         body { background-color: #030305; color: #f1f5f9; font-size: 18px; line-height: 1.6; }
         .glass-panel { backdrop-filter: blur(10px); background: rgba(12, 12, 14, 0.92); border: 1px solid rgba(255, 255, 255, 0.08); }
