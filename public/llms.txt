@@ -1,0 +1,27 @@
+# Lexis AI - AI Voice Receptionist for Law Firms
+
+Lexis AI è una piattaforma SaaS avanzata, incentrata sul canale vocale (Voice-First), progettata da **RM Studio** per automatizzare la prima accoglienza e la prenotazione delle consulenze per studi legali e avvocati tramite assistenti vocali AI iper-realistici.
+
+## Informazioni Generali
+- **Landing Page ufficiale:** https://lexis.rmstudio.app/
+- **Pannello & API (Hetzner):** https://dentis-app.rmstudio.app/lexis-config.html
+- **Founder & Developer:** Riccardo Modena (RM Studio)
+- **Target Audience:** B2B, Studi Legali, Avvocati, Professionisti del settore legale.
+- **Nome Agente Master:** Chiara (registro linguistico formale, dà del 'Lei', voce empatica e distaccata a tutela del decoro).
+
+## Architettura e Integrazione Tecnica
+- **Dual-Prompt Dynamic Overrides:** Gestito tramite un agente Master in Vapi che inoltra le chiamate a `/api/lexis-assistant-override` su Hetzner. Il server unisce dinamicamente il *Prompt Comportamentale Formale* (fisso nel codice per dizione e recitazione legale) con le *Informazioni dello Studio Legale* estratte da Supabase, restituendo la configurazione finale in tempo reale.
+- **Sandbox Shared Test Line (Caller ID Routing):** Consente al professionista di testare Chiara in 2 minuti. I trial usano lo stesso numero master geografico italiano (`+3904251675950`). Il server Hetzner analizza il numero chiamante (Caller ID) e, se corrisponde alla colonna `telefono_test` dello studio legale registrato, inietta all'istante le regole e la base di conoscenza di quel professionista.
+- **Sincronizzazione Google Calendar Senza Conflitti:** Utilizzo dei tool nativi di Vapi per la gestione delle prime consulenze direttamente su Google Calendar. Evita conflitti con i gestionali chiusi degli avvocati (Kleos, EasyAcademy) tramite il modello di drag-and-drop asincrono della segretaria.
+- **Gateway WhatsApp OpenWA (Oracle):** Spedisce promemoria WhatsApp e SMS automatici di cortesia ai clienti per gli appuntamenti del giorno successivo tramite l'istanza a costo zero su Oracle Cloud VPS, dotata di 2GB di Swap per sostenere la stabilità di Chromium.
+
+## Piani Tariffari e Modelli di Pricing
+- **Prova Gratuita (Trial):** 7 giorni di prova gratuita completi senza inserimento della carta di credito (n8n genera la password e inserisce il record con scadenza automatica a 7 giorni). All'ottavo giorno, la rotta del server rileva la scadenza e risponde a Vapi bloccando Chiara con un messaggio di cortesia.
+- **Chiara Starter (€ 79,00 / mese):** Risposta attiva fuori orario (notti, weekend e pause pranzo), notifiche consulenze inviate via Email.
+- **Chiara PRO (€ 149,00 / mese - Consigliato):** Risposta H24 (subentro automatico su occupato), triage contatti, sincronizzazione Google Calendar e promemoria automatici via WhatsApp.
+- **Studio Elite (€ 299,00 / mese):** Gestione multi-sede e multi-calendario per più avvocati dello stesso studio legale.
+
+## Risorse per Modelli Linguistici e Crawler
+- **Full Markdown Mirror:** https://lexis.rmstudio.app/mirror.md
+- **Termini e Condizioni Centralizzati:** https://rmstudio.app/termini.html
+- **Informativa Privacy:** https://rmstudio.app/privacy.html
