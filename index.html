@@ -16,7 +16,7 @@
     
     <!-- Metadati SEO & Favicon -->
     <meta name="description" content="Ogni cliente trova sempre risposta. Chiara gestisce le telefonate dello studio legale H24, fissa gli appuntamenti su Google Calendar e invia promemoria automatici via WhatsApp ed Email.">
-    <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">
+    <link rel="icon" href="https://rmstudio.app/public/logo.ico?v=2" type="image/x-icon">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -303,7 +303,7 @@
     <!-- LAYER BACKGROUND VIDEO FLUIDO -->
     <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <video autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-15">
-            <source src="/background.mp4" type="video/mp4">
+            <source src="https://rmstudio.app/public/video/background.mp4" type="video/mp4">
         </video>
         <div class="absolute inset-0 bg-gradient-to-b from-darkBg/95 via-darkBg/60 to-darkBg"></div>
     </div>
@@ -718,7 +718,7 @@
             </div>
             <div class="flex flex-col items-center gap-4 text-center">
                 <h4 class="text-white font-bold text-sm uppercase tracking-widest">Supporto</h4>
-                <a href="#contatti" class="bg-white/8 hover:bg-white/15 border border-white/15 text-white px-6 py-2 rounded-full text-xs font-bold transition-all text-center font-bold">Contattaci</a>
+                <a href="#contatti" class="bg-white/8 hover:bg-white/15 border border-white/15 text-white px-6 py-2 rounded-full text-xs font-bold transition-all text-center">Contattaci</a>
             </div>
         </div>
     </footer>
@@ -726,7 +726,7 @@
     <!-- INTERACTIVE ORBITAL SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch("https://www.rmstudio.app/orbit-template?v=1")
+            fetch("https://rmstudio.app/public/orbit-template.html?v=1")
                 .then((res) => {
                     if (!res.ok) throw new Error("Errore caricamento widget");
                     return res.text();
