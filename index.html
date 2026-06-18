@@ -479,6 +479,10 @@
                             <option value="Max">Studio Elite (Multi-sede + Supporto - 299€/mese)</option>
                         </select>
                     </div>
+                    <div>
+                        <label class="block text-sm text-zinc-400 mb-2 uppercase tracking-widest font-bold text-xs">Sito Web dello Studio *</label>
+                        <input type="url" id="reg-sito" required class="w-full bg-black/50 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-brandGold transition-colors text-sm" placeholder="es. https://www.studiolegalerossi.it">
+                    </div>
                     
                     <div class="md:col-span-2 mt-2">
                         <button type="submit" id="btn-registrati" class="w-full bg-brandGold text-black font-black py-4 rounded-xl hover:bg-yellow-500 transition-transform active:scale-95 text-lg uppercase tracking-wider">Inizia Trial Gratuito</button>
@@ -506,6 +510,7 @@
                         "Email": document.getElementById('reg-email').value,
                         "Telefono": document.getElementById('reg-tel').value,
                         "Piano": document.getElementById('reg-piano').value,
+                        "Sito Web": document.getElementById('reg-sito').value, // Raccoglie l'URL inserito
                         "Fonte": "Sito Web Lexis"
                     };
 
