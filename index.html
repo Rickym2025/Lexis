@@ -510,9 +510,11 @@
                         "Email": document.getElementById('reg-email').value,
                         "Telefono": document.getElementById('reg-tel').value,
                         "Piano": document.getElementById('reg-piano').value,
-                        "Sito Web": document.getElementById('reg-sito').value, // Raccoglie l'URL inserito
+                        "Sito Web": document.getElementById('reg-sito').value,
+                        "Settore": "legale", // Identificatore di settore unificato
                         "Fonte": "Sito Web Lexis"
                     };
+
 
                     try {
                         const response = await fetch('https://n8n.rmstudio.app/webhook/lexis-registrazione', {
