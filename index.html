@@ -235,7 +235,7 @@
           },
           {
             "@type": "Offer",
-            "name": "Chiara PRO (Scelta d&apos;Oro)",
+            "name": "Chiara PRO (Scelta d'Oro)",
             "price": "149.00",
             "priceCurrency": "EUR",
             "description": "Risposta H24 (subentro su occupato), triage contatti, sincronizzazione Google Calendar e promemoria automatici via WhatsApp.",
@@ -472,9 +472,9 @@
                         <label class="block text-sm text-zinc-400 mb-2 uppercase tracking-widest font-bold text-xs">Piano desiderato dopo la prova *</label>
                         <select id="reg-piano" required class="w-full bg-black/50 border border-white/10 text-white rounded-xl px-4 py-3 outline-none focus:border-brandGold transition-colors appearance-none text-sm">
                             <option value="Prova">Trial Gratuito (7 Giorni)</option>
-                            <option value="starter">Chiara Starter (Fuori Orario - 79€/mese)</option>
-                            <option value="pro">Chiara PRO (H24 + WhatsApp Reminders - 149€/mese)</option>
-                            <option value="elite">Studio Elite (Multi-sede + Supporto - 299€/mese)</option>
+                            <option value="starter" data-plan-option="starter">Chiara Starter (Fuori Orario - 79€/mese)</option>
+                            <option value="pro" data-plan-option="pro">Chiara PRO (H24 + WhatsApp Reminders - 149€/mese)</option>
+                            <option value="elite" data-plan-option="elite">Studio Elite (Multi-sede + Supporto - 299€/mese)</option>
                         </select>
                     </div>
                     <div>
@@ -483,7 +483,7 @@
                     </div>
                     
                     <div class="md:col-span-2 mt-2">
-                        <button type="submit" id="btn-registrati" class="w-full bg-brandGold text-black font-black py-4 rounded-xl hover:bg-yellow-500 transition-transform active:scale-95 text-lg uppercase tracking-wider">Inizia Trial Gratuito</button>
+                        <button type="submit" id="btn-registrati" class="w-full bg-brandGold text-black font-black py-4 rounded-xl hover:bg-yellow-500 transition-transform active:scale-95 text-lg uppercase tracking-wider cursor-pointer">Inizia Trial Gratuito</button>
                     </div>
                     <div id="reg-msg" class="md:col-span-2 text-center text-sm font-bold hidden"></div>
                 </form>
@@ -585,7 +585,7 @@
                             <h3 class="text-lg font-bold text-white mb-1">Chiara Starter</h3>
                             <div class="mb-4 text-xs font-bold text-red-500/80 line-through">€ 149,00 / mese</div>
                             <div class="mb-7 flex items-end gap-1">
-                                <span class="text-4xl font-black text-white">€ 79</span>
+                                <span class="text-4xl font-black text-white" data-price-plan="starter">€ 79</span>
                                 <span class="text-zinc-500 text-xs pb-1">/ mese</span>
                             </div>
                             <ul class="text-xs text-zinc-300 space-y-3 mb-8">
@@ -593,7 +593,7 @@
                                 <li class="flex items-center gap-2"><span class="text-brandGold">✓</span> Notifica appuntamenti presi via Email</li>
                             </ul>
                         </div>
-                        <button onclick="avviaCheckoutLexis('starter')" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest">Attiva Starter</button>
+                        <button onclick="avviaCheckoutLexis('starter')" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest cursor-pointer">Attiva Starter</button>
                     </div>
 
                     <!-- PRO -->
@@ -604,7 +604,7 @@
                             <h3 class="text-lg font-bold text-white mb-1">Chiara PRO</h3>
                             <div class="mb-4 text-xs font-bold text-red-500/80 line-through">€ 299,00 / mese</div>
                             <div class="mb-7 flex items-end gap-1">
-                                <span class="text-4xl font-black text-white">€ 149</span>
+                                <span class="text-4xl font-black text-white" data-price-plan="pro">€ 149</span>
                                 <span class="text-zinc-500 text-xs pb-1">/ mese</span>
                             </div>
                             <p class="text-[11px] text-brandGold font-medium mb-6">Meno di 5€ al giorno. Una sola pratica o consulenza recuperata ripaga l&apos;anno.</p>
@@ -614,7 +614,7 @@
                                 <li class="flex items-center gap-2"><span class="text-brandGold">✓</span> Promemoria automatici via WhatsApp</li>
                             </ul>
                         </div>
-                        <button onclick="avviaCheckoutLexis('pro')" class="block text-center w-full bg-brandGold text-black font-black py-4 rounded-xl text-xs uppercase tracking-widest hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/25">SBLOCCA CHIARA PRO 🔥</button>
+                        <button onclick="avviaCheckoutLexis('pro')" class="block text-center w-full bg-brandGold text-black font-black py-4 rounded-xl text-xs uppercase tracking-widest hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/25 cursor-pointer">SBLOCCA CHIARA PRO 🔥</button>
                     </div>
 
                     <!-- ELITE -->
@@ -624,7 +624,7 @@
                             <h3 class="text-lg font-bold text-white mb-1">Studio Elite</h3>
                             <div class="mb-4 text-xs font-bold text-red-500/80 line-through">€ 599,00 / mese</div>
                             <div class="mb-7 flex items-end gap-1">
-                                <span class="text-4xl font-black text-white">€ 299</span>
+                                <span class="text-4xl font-black text-white" data-price-plan="elite">€ 299</span>
                                 <span class="text-zinc-500 text-xs pb-1">/ mese</span>
                             </div>
                             <ul class="text-xs text-zinc-300 space-y-3 mb-8">
@@ -632,7 +632,7 @@
                                 <li class="flex items-center gap-2"><span class="text-brandGold">✓</span> Supporto tecnico prioritario h24</li>
                             </ul>
                         </div>
-                        <button onclick="avviaCheckoutLexis('elite')" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest">Richiedi Elite</button>
+                        <button onclick="avviaCheckoutLexis('elite')" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest cursor-pointer">Richiedi Elite</button>
                     </div>
 
                 </div>
