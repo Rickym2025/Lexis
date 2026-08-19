@@ -303,10 +303,13 @@
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
-    <!-- LAYER BACKGROUND VIDEO FLUIDO -->
+    <!-- LAYER BACKGROUND VIDEO FLUIDO CON SUPPORTO WEBP -->
     <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <video autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover opacity-15">
+        <video autoplay muted loop playsinline preload="auto" poster="public/background_webp.webp" class="w-full h-full object-cover opacity-15">
+            <source src="public/background_webp.webp" type="image/webp">
+            <source src="/background_webp.webp" type="image/webp">
             <source src="/background.mp4" type="video/mp4">
+            <source src="public/background.mp4" type="video/mp4">
         </video>
         <div class="absolute inset-0 bg-gradient-to-b from-darkBg/95 via-darkBg/60 to-darkBg"></div>
     </div>
@@ -593,7 +596,7 @@
                                 <li class="flex items-center gap-2"><span class="text-brandGold">✓</span> Notifica appuntamenti presi via Email</li>
                             </ul>
                         </div>
-                        <button onclick="avviaCheckoutLexis('starter')" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest cursor-pointer">Attiva Starter</button>
+                        <button onclick="avviaCheckoutLexis('starter')" data-btn-plan="starter" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest cursor-pointer">Attiva Starter</button>
                     </div>
 
                     <!-- PRO -->
@@ -614,7 +617,7 @@
                                 <li class="flex items-center gap-2"><span class="text-brandGold">✓</span> Promemoria automatici via WhatsApp</li>
                             </ul>
                         </div>
-                        <button onclick="avviaCheckoutLexis('pro')" class="block text-center w-full bg-brandGold text-black font-black py-4 rounded-xl text-xs uppercase tracking-widest hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/25 cursor-pointer">SBLOCCA CHIARA PRO 🔥</button>
+                        <button onclick="avviaCheckoutLexis('pro')" data-btn-plan="pro" class="block text-center w-full bg-brandGold text-black font-black py-4 rounded-xl text-xs uppercase tracking-widest hover:bg-yellow-400 transition-all shadow-lg shadow-yellow-500/25 cursor-pointer">SBLOCCA CHIARA PRO 🔥</button>
                     </div>
 
                     <!-- ELITE -->
@@ -632,7 +635,7 @@
                                 <li class="flex items-center gap-2"><span class="text-brandGold">✓</span> Supporto tecnico prioritario h24</li>
                             </ul>
                         </div>
-                        <button onclick="avviaCheckoutLexis('elite')" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest cursor-pointer">Richiedi Elite</button>
+                        <button onclick="avviaCheckoutLexis('elite')" data-btn-plan="elite" class="block text-center w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl font-bold transition-all text-xs uppercase tracking-widest cursor-pointer">Richiedi Elite</button>
                     </div>
 
                 </div>
@@ -785,6 +788,174 @@
                 .catch((err) => console.error("Impossibile caricare l'ecosistema orbitale:", err));
         });
     </script>
+
+    <!-- ── CHATBOT WIDGET: CHIARA AI (RECEPTIONIST LEGALE H24) ── -->
+    <div id="lexis-chatbot-container"></div>
+    <script>
+    const WEBHOOK_LEXIS_CHATBOT = 'https://n8n.rmstudio.app/webhook/lexis-chatbot';
+    let lexisChatSessionId = localStorage.getItem('lexis_chat_session') || ('lex_' + Math.random().toString(36).substring(7));
+    localStorage.setItem('lexis_chat_session', lexisChatSessionId);
+    let lexisChatIsOpen = window.innerWidth > 900;
+
+    function injectLexisChatbot() {
+        const container = document.getElementById('lexis-chatbot-container');
+        if (!container) return;
+        
+        container.innerHTML = `
+        <style>
+        :root {
+            --lx-gold: #f1b827;
+            --lx-surface: rgba(5, 14, 28, 0.96);
+            --lx-surface2: rgba(10, 20, 38, 0.96);
+            --lx-text: #f1f5f9;
+            --lx-black: #020712;
+            --lx-border: rgba(241, 184, 39, 0.25);
+            --lx-green: #4ade80;
+        }
+        #lx-bubble { position:fixed; bottom:30px; left:30px; width:65px; height:65px;
+            border-radius:50%; background:var(--lx-gold); box-shadow:0 10px 25px rgba(241,184,39,.4);
+            cursor:pointer; z-index:9999; display:flex; align-items:center; justify-content:center;
+            border:2px solid #020712; transition:transform .3s; }
+        #lx-bubble:hover { transform:scale(1.1); }
+        #lx-window { position:fixed; bottom:110px; left:30px; width:360px; height:540px;
+            background:var(--lx-surface); backdrop-filter: blur(16px); border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.9);
+            z-index:9999; display:none; flex-direction:column; overflow:hidden;
+            font-family:'DM Sans', sans-serif; border:1px solid var(--lx-border); }
+        .lx-header { background:var(--lx-surface2); border-bottom:1px solid var(--lx-border); color:var(--lx-text);
+            padding:16px 20px; font-weight:700; display:flex; justify-content:space-between; align-items:center; }
+        .lx-messages { flex:1; padding:20px; overflow-y:auto; background:var(--lx-black);
+            display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth; }
+        .lx-msg { padding:14px 18px; border-radius:18px; font-size:14px; max-width:88%; line-height:1.55; }
+        .lx-msg.bot  { background:var(--lx-surface2); color:var(--lx-text); border:1px solid var(--lx-border);
+            align-self:flex-start; border-bottom-left-radius:4px; }
+        .lx-msg.user { background:var(--lx-gold); color:var(--lx-black); font-weight:600;
+            align-self:flex-end; border-bottom-right-radius:4px; }
+        .lx-msg b { font-weight:700; color:var(--lx-gold); }
+        .lx-msg.user b { color:var(--lx-black); }
+        .lx-chips { display:flex; flex-wrap:wrap; gap:8px; padding:0 20px 16px; background:var(--lx-black); }
+        .lx-chip { background:var(--lx-surface2); border:1px solid var(--lx-border); color:var(--lx-gold);
+            padding:7px 12px; border-radius:20px; font-size:12px; cursor:pointer; transition:.2s; font-weight:600; }
+        .lx-chip:hover { background:var(--lx-gold); color:var(--lx-black); }
+        .lx-input-area { padding:14px; border-top:1px solid var(--lx-border); display:flex; gap:10px; background:var(--lx-surface2); }
+        .lx-input-area input { flex:1; border:1px solid var(--lx-border); border-radius:10px; padding:10px 14px;
+            outline:none; font-size:14px; color:var(--lx-text); background:var(--lx-black); font-family:inherit; }
+        .lx-input-area input:focus { border-color:var(--lx-gold); }
+        .lx-input-area button { background:var(--lx-gold); border:none; border-radius:10px; color:var(--lx-black);
+            cursor:pointer; font-weight:800; font-size:13px; padding:0 16px; transition:.2s; }
+        .lx-input-area button:hover { transform:translateY(-2px); }
+        .typing-dot { width:6px; height:6px; background:var(--lx-gold); border-radius:50%;
+            display:inline-block; animation:lxtyping 1.4s infinite ease-in-out; margin-right:3px; }
+        .typing-dot:nth-child(2) { animation-delay:.2s; }
+        .typing-dot:nth-child(3) { animation-delay:.4s; }
+        @keyframes lxtyping { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-5px)} }
+        @media(max-width:450px) {
+            #lx-window { width:calc(100% - 40px); height:490px; left:20px; bottom:90px; }
+            #lx-bubble { bottom:20px; left:20px; }
+        }
+        </style>
+
+        <div id="lx-bubble" title="Parla con Chiara AI">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+        </div>
+
+        <div id="lx-window">
+            <div class="lx-header">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:34px;height:34px;background:rgba(241,184,39,.15);border:1px solid var(--lx-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--lx-gold);font-size:15px;font-weight:800;font-family:'Cormorant Garamond',serif;">L</div>
+                    <div style="display:flex;flex-direction:column;">
+                        <span style="font-size:15px;line-height:1.2;font-weight:bold;">Chiara AI</span>
+                        <span style="font-size:11px;color:var(--lx-green);font-weight:normal;">● Segreteria Online</span>
+                    </div>
+                </div>
+                <button id="lx-close-btn" style="background:none;border:none;color:var(--lx-text);opacity:0.5;font-size:26px;cursor:pointer;line-height:1;">&times;</button>
+            </div>
+            <div id="lx-messages" class="lx-messages">
+                <div class="lx-msg bot">
+                    Buongiorno. Sono <b>Chiara</b>, l'assistente telefonica per studi legali. ⚖️<br><br>
+                    Posso illustrarle come <b>presidiare le chiamate H24</b>, concordare le prime consulenze in agenda e garantire la riservatezza forense ai Suoi assistiti. Cosa desidera sapere?
+                </div>
+            </div>
+            <div id="lx-chips-container" class="lx-chips">
+                <div class="lx-chip" onclick="sendLxMsg('Come funziona la deviazione di chiamata?')">Come funziona?</div>
+                <div class="lx-chip" onclick="sendLxMsg('Come si integra con Google Calendar?')">Google Calendar</div>
+                <div class="lx-chip" onclick="sendLxMsg('Rispetta il segreto professionale e il GDPR?')">GDPR & Riservatezza</div>
+            </div>
+            <div class="lx-input-area">
+                <input type="text" id="lx-input" placeholder="Scriva qui la Sua domanda..." onkeypress="if(event.key==='Enter') sendLxMsg()">
+                <button onclick="sendLxMsg()">Invia</button>
+            </div>
+        </div>
+        `;
+
+        document.getElementById('lx-bubble').addEventListener('click', toggleLxChat);
+        document.getElementById('lx-close-btn').addEventListener('click', toggleLxChat);
+        document.getElementById('lx-window').style.display = lexisChatIsOpen ? 'flex' : 'none';
+    }
+
+    function toggleLxChat() {
+        const win = document.getElementById('lx-window');
+        lexisChatIsOpen = !lexisChatIsOpen;
+        win.style.display = lexisChatIsOpen ? 'flex' : 'none';
+    }
+
+    async function sendLxMsg(textOverride) {
+        const input = document.getElementById('lx-input');
+        const text = (textOverride || input.value).trim();
+        if (!text) return;
+
+        input.value = '';
+        addLxMsg(text, 'user');
+
+        const chips = document.getElementById('lx-chips-container');
+        if (chips) chips.style.display = 'none';
+
+        const loadingId = 'lx-loading-' + Date.now();
+        addLxMsg('<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>', 'bot', loadingId);
+
+        try {
+            const res = await fetch(WEBHOOK_LEXIS_CHATBOT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text, sessionId: lexisChatSessionId, settore: 'legale' }),
+                signal: AbortSignal.timeout(15000)
+            });
+
+            const raw = await res.text();
+            let reply = 'Sto elaborando la risposta per il Suo studio...';
+            if (raw && raw.trim() !== '') {
+                try {
+                    const data = JSON.parse(raw);
+                    reply = data.output || data.response || data.text || reply;
+                } catch (_) { reply = raw; }
+            }
+
+            const loadEl = document.getElementById(loadingId);
+            if (loadEl) loadEl.remove();
+            addLxMsg(reply, 'bot');
+        } catch (err) {
+            const loadEl = document.getElementById(loadingId);
+            if (loadEl) loadEl.remove();
+            addLxMsg('Scusate, i server di consultazione sono attualmente impegnati. Vi preghiamo di riprovare tra pochi istanti.', 'bot');
+        }
+    }
+
+    function addLxMsg(text, sender, id) {
+        const div = document.createElement('div');
+        div.className = `lx-msg ${sender}`;
+        if (id) div.id = id;
+        div.innerHTML = text
+            .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+            .replace(/\n/g, '<br>');
+        const box = document.getElementById('lx-messages');
+        box.appendChild(div);
+        box.scrollTo({ top: box.scrollHeight, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', injectLexisChatbot);
+    </script>
+
     <!-- Script Motore di Pagamento Stripe On-The-Fly -->
     <script src="pricing.js"></script>
     <script src="https://rmstudio.app/public/cookie-banner.js" defer></script>
