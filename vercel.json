@@ -2,5 +2,17 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/index.html" }
+  ],
+  "redirects": [
+    {
+      "source": "/config",
+      "destination": "https://dentis-app.rmstudio.app/lexis-config.html",
+      "permanent": false
+    },
+    {
+      "source": "/lexis-config",
+      "destination": "https://dentis-app.rmstudio.app/lexis-config.html",
+      "permanent": false
+    }
   ]
 }
