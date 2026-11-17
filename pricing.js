@@ -1,5 +1,5 @@
 /**
- * Lexis AI - Live Pricing & Stripe Checkout Engine
+ * Lexis AI - Live Pricing & Stripe Checkout Engine (Abbonamenti + Crediti)
  * RM Studio Universal Engine
  */
 
@@ -8,30 +8,56 @@ const SUPABASE_S2_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzd
 
 // 1. Prezzi di Fallback Immediati (Zero Flicker)
 const LEXIS_PRICES = {
-    starter: { id: 'starter', name: 'Chiara Starter (Fuori Orario)', price: 79 },
-    pro:     { id: 'pro',     name: 'Chiara PRO (H24 + WhatsApp)',  price: 149 },
-    elite:   { id: 'elite',   name: 'Studio Elite (Multi-sede)',    price: 299 }
+    starter:   { id: 'starter',   name: 'Chiara Starter (Fuori Orario)', price: 79,  mode: 'monthly' },
+    pro:       { id: 'pro',       name: 'Chiara PRO (H24 + WhatsApp)',   price: 149, mode: 'monthly' },
+    elite:     { id: 'elite',     name: 'Studio Elite (Multi-sede)',     price: 299, mode: 'monthly' },
+    pack_100:  { id: 'pack_100',  name: 'Ricarica Base (100 min)',       price: 49,  mode: 'credits' },
+    pack_450:  { id: 'pack_450',  name: 'Ricarica Pro (450 min)',        price: 179, mode: 'credits' },
+    pack_1000: { id: 'pack_1000', name: 'Ricarica Max (1000 min)',       price: 349, mode: 'credits' }
 };
 
 // 2. Render Reattivo del DOM (Schede Listino e Select Form)
 function renderLexisPrices() {
-    ['starter', 'pro', 'elite'].forEach(planKey => {
+    Object.keys(LEXIS_PRICES).forEach(planKey => {
         const plan = LEXIS_PRICES[planKey];
         if (!plan) return;
 
-        // Aggiorna il testo del prezzo nelle card
         const elPrice = document.querySelector(`[data-price-plan="${planKey}"]`);
         if (elPrice) elPrice.textContent = `€ ${plan.price}`;
 
-        // Aggiorna l'opzione nel menu a tendina del form
         const elOption = document.querySelector(`option[data-plan-option="${planKey}"]`);
         if (elOption) {
-            elOption.textContent = `${plan.name} (${plan.price}€/mese)`;
+            const suffix = plan.mode === 'credits' ? 'una tantum' : '/mese';
+            elOption.textContent = `${plan.name} (${plan.price}€ ${suffix})`;
         }
     });
 }
 
-// 3. Fetch Live da Supabase S2 (Tabella saas_pricing)
+// 3. Switch Tab Abbonamento Mensile vs Ricarica Minuti (Senza Canone)
+function setLexisPricingMode(mode) {
+    const monthlyBox = document.getElementById('lexis-plans-monthly');
+    const creditsBox = document.getElementById('lexis-plans-credits');
+    const btnMonthly = document.getElementById('btn-mode-monthly');
+    const btnCredits = document.getElementById('btn-mode-credits');
+    if (!monthlyBox || !creditsBox || !btnMonthly || !btnCredits) return;
+
+    const activeCls = 'px-6 py-3 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider bg-brandGold text-black shadow-lg transition-all cursor-pointer';
+    const idleCls   = 'px-6 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-300 hover:text-white transition-all cursor-pointer';
+
+    if (mode === 'credits') {
+        monthlyBox.classList.add('hidden');
+        creditsBox.classList.remove('hidden');
+        btnCredits.className = activeCls;
+        btnMonthly.className = idleCls;
+    } else {
+        creditsBox.classList.add('hidden');
+        monthlyBox.classList.remove('hidden');
+        btnMonthly.className = activeCls;
+        btnCredits.className = idleCls;
+    }
+}
+
+// 4. Fetch Live da Supabase S2 (Tabella saas_pricing)
 async function fetchLexisLivePricing() {
     try {
         const res = await fetch(`${SUPABASE_S2_URL}/rest/v1/saas_pricing?saas=eq.lexis&select=*`, {
@@ -60,7 +86,7 @@ async function fetchLexisLivePricing() {
     }
 }
 
-// 4. Avvio Checkout Stripe On-The-Fly via n8n
+// 5. Avvio Checkout Stripe On-The-Fly via n8n
 async function avviaCheckoutLexis(planKey, email = '', nome = '') {
     const plan = LEXIS_PRICES[planKey];
     if (!plan) return;
@@ -89,7 +115,7 @@ async function avviaCheckoutLexis(planKey, email = '', nome = '') {
         if (!res.ok) throw new Error("Errore creazione sessione Stripe");
         const data = await res.json();
         const redirectUrl = data.url || data.checkout_url || data.session_url;
-        
+
         if (redirectUrl) {
             window.location.href = redirectUrl;
         } else {
